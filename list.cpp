@@ -51,14 +51,23 @@ public:
 		Node<E>* newNode = new Node<E>;
 		newNode->elem = data;
 		Node<E>* p = head;
-		if (empty()) {
-			head = newNode;
-		}
+		if (empty()) { head = newNode; }
 		else {
 			while (p->next != NULL) {
 				p = p->next;
 			}
 			p->next = newNode;
+		}
+		size_++;
+	}
+	void addToFrontOfList(const E& data) {
+		Node<E>* newNode = new Node<E>;
+		newNode->elem = data;
+		Node<E>* p = head;
+		if (empty()) { head = newNode; }
+		else {
+			newNode->next = p;
+			head->next = newNode;
 		}
 		size_++;
 	}
@@ -78,30 +87,30 @@ private:
 };
 
 
-int* intFun(SLinkedList<int>* i) {
+SLinkedList<int>* intFun(SLinkedList<int>* i) {
 	int integer = 0;
-	int intArr[5];
-	int count = 1, digit = 0;
 	cout << "Enter an interger: ";
-	cin >> integer;
+	cin >> integer;		//integer = 123
 
-	while (integer > 0) {
-		digit = integer % 10;			//digit = 12 % 10 = 2
-		integer /= 10;					//integer = 12 / 10 = 1
-		count++;						//count = 2
-
+	while (integer >= 10) {
+		int digit = integer % 10;		//digit = 123 % 10 = 3  ------  digit = 12 % 10 = 2
+		integer /= 10;					//integer = 123 / 10 = 12 ----  integer = 12 / 10 = 1
+		i->addToFrontOfList(digit);
 	}
 
+	i->addToFrontOfList(integer);
 
-	return 0;
+	return i;
 }
-string stringFun(SLinkedList<string>* s) {
 
-	return "end";
+SLinkedList<string>* stringFun(SLinkedList<string>* s) {
+
+	return s;
 }
-char charFun(SLinkedList<char>* c) {
 
-	return 'n';
+SLinkedList<char>* charFun(SLinkedList<char>* c) {
+
+	return c;
 }
 
 
@@ -116,28 +125,33 @@ int main() {
 		cout << "1. Integer" << endl;
 		cout << "2. String" << endl;
 		cout << "3. Character" << endl;
+		cout << "Q. Quit" << endl;
 		cin >> type;
 	
 
 		switch (type) {
-		case 1:
+		case '1': {
 			SLinkedList<int>* i = new SLinkedList<int>;
-			intFun(i);
+			cout << intFun(i) << endl;
 			break;
-		case 2:
+		}
+		case '2': {
 			SLinkedList<string>* s = new SLinkedList<string>;
-			stringFun(s);
+			cout << stringFun(s) << endl;
 			break;
-		case 3:
+		}
+		case '3': {
 			SLinkedList<char>* c = new SLinkedList<char>;
-			charFun(c);
+			cout << charFun(c) << endl;
 			break;
-		case -1:
+		}
+		case 'Q':
+		case 'q':
 			exit(-1);
 		default:
 			cout << "Invalid option..." << endl;
 		}
-	} while (type != -1);
+	} while (type != 'Q' || type != 'q');
 	
 	return 0;
 }
