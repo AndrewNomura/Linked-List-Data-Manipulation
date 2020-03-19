@@ -4,22 +4,17 @@
 using namespace std;
 
 
-class Base {
-public:
-	virtual ~Base() {};
-};
-
 template <typename E>
 struct Node {
 	Node() :next(NULL), elem(NULL) {}
 
-	Node<Base>* next;
-	Base elem;
+	Node<E>* next;
+	E elem;
 };
 
 
 template <typename E>
-class SLinkedList : public Base {
+class SLinkedList {
 public:
 	SLinkedList() :head(NULL), size_(0) {}
 
@@ -78,12 +73,12 @@ public:
 
 
 private:
-	Node<Base>* head;
+	Node<E>* head;
 	size_t size_;
 };
 
 
-int* intFun(SLinkedList<int>* s) {
+int* intFun(SLinkedList<int>* i) {
 	int integer = 0;
 	int intArr[5];
 	int count = 1, digit = 0;
@@ -104,7 +99,7 @@ string stringFun(SLinkedList<string>* s) {
 
 	return "end";
 }
-char charFun(SLinkedList<char>* s) {
+char charFun(SLinkedList<char>* c) {
 
 	return 'n';
 }
@@ -112,7 +107,6 @@ char charFun(SLinkedList<char>* s) {
 
 int main() {
 	char type;
-	Base* b;
 
 	cout << "Welcome to Linked List Data Manipulation" << endl << endl;
 
@@ -127,13 +121,16 @@ int main() {
 
 		switch (type) {
 		case 1:
-			intFun(new SLinkedList<int>);
+			SLinkedList<int>* i = new SLinkedList<int>;
+			intFun(i);
 			break;
 		case 2:
-			stringFun(new SLinkedList<string>);
+			SLinkedList<string>* s = new SLinkedList<string>;
+			stringFun(s);
 			break;
 		case 3:
-			charFun(new SLinkedList<char>);
+			SLinkedList<char>* c = new SLinkedList<char>;
+			charFun(c);
 			break;
 		case -1:
 			exit(-1);
@@ -142,9 +139,5 @@ int main() {
 		}
 	} while (type != -1);
 	
-
-
-
-	delete b; //delete allocated memory
 	return 0;
 }
