@@ -76,53 +76,72 @@ public:
 	}
 
 
+
 private:
 	Node<Base>* head;
 	size_t size_;
 };
 
 
-int* intFun() {
+int* intFun(SLinkedList<int>* s) {
 	int integer = 0;
 	int intArr[5];
+	int count = 1, digit = 0;
 	cout << "Enter an interger: ";
 	cin >> integer;
 
 	while (integer > 0) {
-		int digit = integer % 10;
-		integer /= 10;
-		
+		digit = integer % 10;			//digit = 12 % 10 = 2
+		integer /= 10;					//integer = 12 / 10 = 1
+		count++;						//count = 2
+
 	}
+
+
+	return 0;
 }
-string stringFun() {}
-char charFun() {}
+string stringFun(SLinkedList<string>* s) {
+
+	return "end";
+}
+char charFun(SLinkedList<char>* s) {
+
+	return 'n';
+}
 
 
 int main() {
 	char type;
 	Base* b;
-	cout << "Enter type of list: " << endl;
-	cout << "1. Integer" << endl;
-	cout << "2. Character" << endl;
-	cout << "3. String" << endl;
-	cin >> type;
 
-	switch (type) {
-	case 1:
-		b = new SLinkedList<int>; 
-		intFun();
-		break;
-	case 2:
-		b = new SLinkedList<char>; 
-		charFun();
-		break;
-	case 3:
-		b = new SLinkedList<string>; 
-		stringFun();
-		break;
-	default:
-		exit(-1);
-	}
+	cout << "Welcome to Linked List Data Manipulation" << endl << endl;
+
+
+	do {
+		cout << "Enter type of list: " << endl;
+		cout << "1. Integer" << endl;
+		cout << "2. String" << endl;
+		cout << "3. Character" << endl;
+		cin >> type;
+	
+
+		switch (type) {
+		case 1:
+			intFun(new SLinkedList<int>);
+			break;
+		case 2:
+			stringFun(new SLinkedList<string>);
+			break;
+		case 3:
+			charFun(new SLinkedList<char>);
+			break;
+		case -1:
+			exit(-1);
+		default:
+			cout << "Invalid option..." << endl;
+		}
+	} while (type != -1);
+	
 
 
 
