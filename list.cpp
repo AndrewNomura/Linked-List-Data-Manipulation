@@ -111,14 +111,14 @@ SLinkedList<int>* intFun(SLinkedList<int>* i) {
 	return i;
 }
 
-SLinkedList<string>* stringFun(SLinkedList<string>* s) {
-
+SLinkedList<char>* stringFun(SLinkedList<char>* s) {
+	char ch[20];
+	cout << endl << "Enter a character array: ";
+	cin >> ch;
+	for (int i = 0; i < sizeof(ch) / sizeof(ch[0]); i++) {
+		s->addToEndOfList(ch[i]);
+	}
 	return s;
-}
-
-SLinkedList<char>* charFun(SLinkedList<char>* c) {
-
-	return c;
 }
 
 
@@ -132,7 +132,6 @@ int main() {
 		cout << "Enter type of list: " << endl;
 		cout << "1. Integer" << endl;
 		cout << "2. String" << endl;
-		cout << "3. Character" << endl;
 		cout << "Q. Quit" << endl;
 		cin >> type;
 	
@@ -144,13 +143,8 @@ int main() {
 			break;
 		}
 		case '2': {
-			SLinkedList<string>* s = new SLinkedList<string>;
+			SLinkedList<char>* s = new SLinkedList<char>;
 			cout << stringFun(s) << endl;
-			break;
-		}
-		case '3': {
-			SLinkedList<char>* c = new SLinkedList<char>;
-			cout << charFun(c) << endl;
 			break;
 		}
 		case 'Q':
@@ -159,7 +153,7 @@ int main() {
 		default:
 			cout << "Invalid option..." << endl;
 		}
-	} while (type != 'Q' || type != 'q');
+	} while (type != 'Q' && type != 'q');
 	
 	return 0;
 }
