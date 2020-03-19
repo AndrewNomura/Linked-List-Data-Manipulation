@@ -6,10 +6,21 @@ using namespace std;
 
 template <typename E>
 struct Node {
-	Node() :next(NULL), elem(NULL) {}
+	Node() :elem(NULL), next(NULL) {}
+	Node(const E& elem, Node<E>* next = nullptr) :
+		elem(elem), next(next) {}
 
-	Node<E>* next;
+	friend ostream& operator<<(ostream& os, const Node<E>& n) {
+		os << n.elem << ", ";
+		os << n.next;
+		return os;
+	}
+	friend istream& operator>>(istream& is, Node<E>& n) {
+		return is >> n; 
+	}
+
 	E elem;
+	Node<E>* next;
 };
 
 
@@ -21,17 +32,14 @@ public:
 	bool const empty() { return size_ == 0; }
 	size_t size() { return size_; }
 
-	friend ostream& operator<<(ostream& os, const SLinkedList& sll) {
-		if (sll.empty()) { cout << "empty list..." << endl; }
-		Node* p = head;
+	friend ostream& operator<<(ostream& os, const SLinkedList<E>& sll) {
+		if (sll.empty()) { return os << "empty list..." << endl; }
+		Node<E>* p = head;
 		while (p != NULL) {
 			os << *p << " ";
 			p = p->next;
 		}
 		return os;
-	}
-	friend istream& operator>>(istream& is, SLinkedList& sll) {
-		return is >> sll.elem;
 	}
 
 	Node<E>* front() { return head; }
@@ -89,7 +97,7 @@ private:
 
 SLinkedList<int>* intFun(SLinkedList<int>* i) {
 	int integer = 0;
-	cout << "Enter an interger: ";
+	cout << endl << "Enter an interger: ";
 	cin >> integer;		//integer = 123
 
 	while (integer >= 10) {
