@@ -113,7 +113,7 @@ SLinkedList<int>* intFun(SLinkedList<int>* i) {
 
 SLinkedList<char>* stringFun(SLinkedList<char>* s) {
 	char ch[20];
-	cout << endl << "Enter a character array: ";
+	cout << endl << "Enter a word: ";
 	cin >> ch;
 	for (int i = 0; i < sizeof(ch) / sizeof(ch[0]); i++) {
 		s->addToEndOfList(ch[i]);
